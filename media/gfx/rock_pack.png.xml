@@ -1,0 +1,4 @@
+<sheet>
+	<sprite name="rock_001_x32.png" x="0" y="0" width="32" height="32" />
+	<sprite name="rock_002_x32.png" x="32" y="0" width="32" height="32" />
+</sheet>

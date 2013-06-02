@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="16" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="rock_pack" tilewidth="32" tileheight="32">
+  <image source="../gfx/rock_pack.png" width="512" height="512"/>
+ </tileset>
+ <layer name="FLOOR" width="16" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NiYGBgGsWjeBSPSAwA64dADQAEAAA=
+  </data>
+ </layer>
+ <layer name="WALL" width="16" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NkYGBgpBCTC5D1M6KJE8Ompv2U6CfH7dS0f6TppzT8sOnHZhYh8wdL+FGCATYH30kABAAA
+  </data>
+ </layer>
+</map>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="spacefight">
+	<property environment="env"/>
+	<property name="debuglevel" value="source,lines,vars"/>
+	<property name="target" value="1.6"/>
+	<property name="source" value="1.6"/>
+
+	<property name="jar.dir" value="web/jar"/>
+	<property name="pack.dir" value="web/pack"/>
+	
+	<property name="mainjar" value="spacefight.jar"/>
+	<property name="linuxnativejar" value="native-linux.jar"/>
+	<property name="windowsnativejar" value="native-windows.jar"/>
+	<property name="macosnativejar" value="native-macos.jar"/>
+	
+	<property name="keystore_alias" value="KEYSTORE_ALIAS"/>
+	<property name="keystore_name" value="KEYSTORE_NAME"/>
+	<property name="keystore_password" value="KEYSTORE_PASSWORD"/>
+	
+	<taskdef name="p200ant"
+		classname="de.matthiasmann.p200ant.P200AntTask"
+		classpath="lib/P200Ant.jar;lib/JLzma.jar"/>
+	
+	<fileset id="jars2pack" dir="${jar.dir}">
+		<include name="*.jar"/>
+	</fileset>
+	
+	<path id="spacefight.classpath">
+		<pathelement location="bin"/>
+		<pathelement location="lib/lwjgl.jar"/>
+		<pathelement location="lib/slick.jar"/>
+	</path>
+	
+	<target name="init">
+		
+		<mkdir dir="bin"/>
+		
+		<copy includeemptydirs="false" todir="bin">
+			<fileset dir="src">
+				<exclude name="**/*.launch"/>
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+		
+		<mkdir dir="web"/>
+		<mkdir dir="${jar.dir}"/>
+		<mkdir dir="${pack.dir}"/>
+		
+		<delete file="${jar.dir}/${mainjar}"/>
+		<delete file="${jar.dir}/${linuxnativejar}"/>
+		<delete file="${jar.dir}/${windowsnativejar}"/>
+		<delete file="${jar.dir}/${macosnativejar}"/>
+		
+	</target>
+	
+	<target depends="build-subprojects,build-project,makejars,signjars" name="build"/>
+	
+	<target name="build-subprojects"/>
+	
+	<target depends="init" name="build-project">
+		<echo message="${ant.project.name}: ${ant.file}"/>
+		<javac debug="true" includeantruntime="false" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+			<src path="src"/>
+			<classpath refid="spacefight.classpath"/>
+		</javac>
+	</target>
+	
+	<target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+	
+	<target name="makejars" depends="build-project">
+		
+		<!-- Make the main jar -->
+		<jar destfile="${jar.dir}/${mainjar}" basedir="bin" includes="com/**/*.class">
+			<manifest>
+				<attribute name="Main-Class" value="com.n3wt0n.spacefight.Test"/>
+			</manifest>
+		</jar>
+		<jar destfile="${jar.dir}/${mainjar}"
+			update="true"
+			basedir="."
+			includes="media/**/*"
+		/>
+		
+		<parallel>
+			<!-- Make the Operating System specific jar files -->
+			<jar destfile="${jar.dir}/${linuxnativejar}"
+				basedir="lib"
+				includes="*.so"
+				compress="true"
+				level="9"
+			/>
+			<jar destfile="${jar.dir}/${windowsnativejar}"
+				basedir="lib"
+				includes="*.dll"
+				compress="true"
+				level="9"
+			/>
+			<jar destfile="${jar.dir}/${macosnativejar}"
+				basedir="lib"
+				includes="*.jnilib,*.dylib"
+				compress="true"
+				level="9"
+			/>
+		</parallel>
+		
+		<!-- Copy the pre-built jars -->
+		<copy todir="${jar.dir}">
+			<fileset dir="lib" includes="slick.jar,lwjgl.jar,lwjgl_util.jar"/>
+		</copy>
+		
+		<p200ant repack="true">
+			<fileset refid="jars2pack"/>
+		</p200ant>
+		
+	</target>
+	
+	<target name="signjars" depends="makejars">
+		
+		<!-- A reminder how to make a java keystore for signing files -->
+		<!-- keytool -genkey -keystore keystoreName -alias myAlias -->
+		
+		<!-- A reminder how to sign a jar via command line. But we don't need it because we're having ant do it below. -->
+		<!-- jarsigner -keystore keystoreName -storepass keystorePassword -keypass keystorePassword myJar.jar myAlias -->
+		<signjar alias="${keystore_alias}" keystore="${keystore_name}" storepass="${keystore_password}">
+			<path>
+				<fileset dir="${jar.dir}" includes="*.jar"/>
+			</path>
+		</signjar>
+		
+		<p200ant destdir="${pack.dir}" singlesegment="true" gzip="false" lzma="true">
+			<fileset refid="jars2pack"/>
+		</p200ant>
+		
+	</target>
+	
+	<target name="clean">
+		
+		<copy includeemptydirs="false" todir="web">
+			<fileset dir="${pack.dir}">
+				<include name="*.lzma"/>
+				<exclude name="*.gz"/>
+			</fileset>
+		</copy>
+		
+		<delete dir="${pack.dir}" />
+		
+	</target>
+
+</project>

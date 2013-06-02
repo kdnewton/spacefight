@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32">
+  <image source="ter/terrain.png" width="512" height="256"/>
+ </tileset>
+ <layer name="BACKGROUND" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2VMQoAIAzEqv9/tLtC7eJdwQzZhIRz6IyIeWEU3rwEv8eZ4fZ3aHD9vXqDbBu1372/0p3t/5O/Q4PbTwMNe0PWobhV1fvovqEAAHCyAHbSiTUAEAAA
+  </data>
+ </layer>
+ <layer name="MAIN" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2SSwqAMAxEA63fev/z2kALItG4kEkX82BAMPCGNCLjs9APp9RsLXL51hwAf3L+IztMtygrwK9Yb997IXbwdHtzTQ7w97tEuC1/ArotP5pov+4bcedvcAfsMFqH3elR2ow390cPK/nDHCGEkDhOkeNTJAAQAAA=
+  </data>
+ </layer>
+ <layer name="WALLS" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3SwQkAIAxD0S7Q/df1LogXTQL9Qs8vCXZVtflcDx//5Cty3fr/zpC8f6L/Omtif+V/3H31Fon74+NP9dV50vrj4+PP8523ACmLr3kAEAAA
+  </data>
+ </layer>
+ <layer name="FOREGROUND" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3BAQ0AAADCoPdPbQ8HFAAAAPBuEQAcxwAQAAA=
+  </data>
+ </layer>
+</map>

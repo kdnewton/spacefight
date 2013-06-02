@@ -1,0 +1,130 @@
+<html>
+<head>
+	<title>Space Fight!</title>
+</head>
+<body style="background-color: #000000">
+<div style="background-color: #cccccc; font-family: monospace; margin-left: auto; margin-right: auto; padding: 10px 5px 10px 5px; text-align: justify; width: 80%;">
+	<center>
+		<h1 style="font-size: 48px">Space Fight!</h1>
+		<applet style="border: 5px solid #999999; padding: 2px" code="org.lwjgl.util.applet.AppletLoader" archive="http://www.lwjgl.org/applet/lwjgl_util_applet.jar, http://www.lwjgl.org/applet/lzma.jar" codebase="." width="854" height="480">
+			<param name="al_title" value="spacefight test">
+			<param name="al_main" value="org.newdawn.slick.AppletGameContainer">
+			<param name="game" value="com.n3wt0n.spacefight.Test"/>
+			<param name="al_logo" value="appletlogo.png">
+			<param name="al_progressbar" value="appletprogress.gif">
+			<param name="al_jars" value="pack/spacefight.jar.pack.lzma, pack/slick.jar.pack.lzma, http://www.lwjgl.org/applet/lwjgl.jar.pack.lzma, http://www.lwjgl.org/applet/lwjgl_util.jar.pack.lzma">
+			<param name="al_windows" value="http://www.lwjgl.org/applet/windows_natives.jar.lzma">
+			<param name="al_linux" value="http://www.lwjgl.org/applet/linux_natives.jar.lzma">
+			<param name="al_mac" value="http://www.lwjgl.org/applet/macosx_natives.jar.lzma">
+			<param name="al_solaris" value="http://www.lwjgl.org/applet/solaris_natives.jar.lzma">
+			<param name="separate_jvm" value="true">
+		</applet>
+	</center>
+	<div name="intro" style="color: #000000; font-size: 24px; margin-bottom: 20px;">
+		<p><strong>Quick Instructions</strong>: Click a pawn (yours are at the bottom), click where you want it to go, then click a bad guy (the ones at the top).
+		When all is set, press the Enter key to watch the action.</p>
+		<p>This is the Space Fight! prototyping page. There is an applet here! It's probably already running.
+		If not, there's probably a certification window that popped up that needs your attention. If you trust that
+		I'm not going to do anything sneaky, you can click 'Run' in the security window to start the game. It's an early prototype so there is not much here.</p>
+		<p style="text-decoration: line-through;">Alternatively, there is a web starter you can click on <a href="#<!-- launch.jnlp -->" style="color: #666666; font-weight: bold">here</a>.
+		That will launch the game in its own window, and create a handy shortcut for you on your desktop.</p>
+		<p><strong>Note</strong>: I appear to still be having trouble with my browser and the applet always running from cache. That's fine
+		except it should be smart enough to notice the version number has changed, and to download the new version.
+		If you're having trouble viewing the new version (you don't see the time running in the bottom left corner)
+		then you'll have to force-flush your applet cache. In Linux you can do that in <strong>jcontrol</strong>
+		from the command line. Clear the cache, close and open the browser, and run the applet again.</p>
+	</div>
+	<div name="changelog" style="color: #000000; font-family: monospace; font-size: 18px">
+		<div style="border-bottom: 1px solid black; margin-bottom: 5px">changelog</div>
+		<div>
+			
+			<div>2010-05-30</div>
+			<ul>
+				<li>Great improvements to Accessible Area Map efficiency</li>
+				<li>Light sources / shadows added (not currently used in demo)</li>
+			</ul>
+			
+			<div>2010-04-27</div>
+			<ul>
+				<li>Resolution changed to 854x480 to reflect that of a Motorola Milestone (Droid)</li>
+				<li>Moved location of TiledMap tile graphics to be accessible by jar (means applet will work once again)</li>
+			</ul>
+			
+			<div>2010-04-25</div>
+			<ul>
+				<li>Now rendering a map</li>
+				<li>Pawns shoot bullets</li>
+				<li>Pawns take damage and can die</li>
+			</ul>
+			
+			<div>2010-01-08</div>
+			<ul>
+				<li>Added basic intelligence for enemy pawns. Enemies now find and follow closest pawn to their position</li>
+			</ul>
+			
+			<div>2010-12-18</div>
+			<ul>
+				<li>Player pawns now stop when they've reached their destination</li>
+				<li>Total time played is now counted, formatted, and displayed as hour : minute : second : millisecond</li>
+			</ul>
+		
+			<div>2010-11-27</div>
+			<ul>
+				<li>Added "Go" state which is responsible for carrying out the instructions given to pawns</li>
+				<li>Pawns point in the direction they are traveling</li>
+			</ul>
+		
+			<div>2010-11-19</div>
+			<ul>
+				<li>Pawns now have a range that limits the distance they can travel</li>
+				<li>The pawn range limit displays as a green circle on screen</li>
+				<li>If the mouse travels outside the range limit, the "potential new location" stops at the range limit</li>
+			</ul>
+		
+			<div>2010-11-13</div>
+			<ul>
+				<li>
+					Created a Camera object
+					<ul>
+						<li>Handles entity rendering</li>
+						<li>Pans the screen and assists in translation of all entity coordinates</li>
+					</ul>
+				</li>
+				<li>Screen now pans with the arrow keys</li>
+				<li>Created Map (level) object and MapTile object (both currently unused)</li>
+				<li>Created placeholder assets for terrain types (currently unused)</li>
+			</ul>
+			
+			<div>2010-11-06</div>
+			<ul>
+				<li>
+					More behind the scenes stuff that you most likely would not notice.
+					The jar files are now compressed to help speed up loading a new version of the game.
+					<a href="http://www.matthiasmann.de/">Matthias Mann</a> of #lwjgl IRC
+					channel was a big help in getting the compression of the jars working.
+				</li>
+			</ul>
+			
+			<div>2010-11-01</div>
+			<ul>
+				<li>
+					Fixed setup state logic
+					<ul>
+						<li>Removed the entire SELECTION_STATE because REVIEW_STATE was handling it all (reduced the number of states from 4 to 3)</li>
+					</ul>
+				</li>
+				<li>Modifed pawns hasDestination and hasTarget logic
+					<ul>
+						<li>hasDestination used to be a boolean but is now hasDestination() which checks for destX and destY values >= 0</li>
+						<li>hasTarget used to be boolean but is now hasTarget() which checks for targetPawn != null</li>
+					</ul>
+				</li>
+				<li>Main loop now determines the state of the readyToGo boolean if every pawn hasOrders() {returns true if pawn.hasDestination() and pawn.hasTarget()}</li>
+				<li>Pawns take into account their rotation now when rendering, though it won't be visible in this build</li>
+				<li>Added a new graphic, a slightly red one, for opposing pawns</li>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>

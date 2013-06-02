@@ -1,0 +1,42 @@
+<?xml version="0.049" encoding="utf-8"?>
+<jnlp
+	spec="1.0+"
+	codebase="http://g2dp.n3wt0n.com/spacefight"
+	href="launch.jnlp"
+>
+	<information>
+		<title>SpaceFight!</title>
+		<vendor>n3wt0n!</vendor>
+		<homepage href="http://g2dp.n3wt0n.com"/>
+		<description>SpaceFight!</description>
+		<description kind="short">SpaceFight!</description>
+		<icon href="http://g2dp.n3wt0n.com/sites/default/files/logo.png" kind="default" />
+		<shortcut online="false">
+			<desktop/>
+		</shortcut>
+	</information>
+	<security>
+		<all-permissions/>
+	</security>
+	<update check="timeout" policy="always"/>
+	<resources>
+		<j2se max-heap-size="134217728" href="http://java.sun.com/products/autodl/j2se" max-heap-size="128M" version="1.4+"/>       
+		<jar href="spacefight.jar" download="eager" main="true" />
+		<jar href="lwjgl.jar" download="eager" main="false" />
+		<jar href="lwjgl_util.jar"/>
+		<jar href="slick.jar" download="eager" main="false" />
+	</resources>
+	<resources os="Linux" arch="i386">
+		<j2se version="1.4+"/>
+		<nativelib href="native-linux.jar"/>
+	</resources>
+	<resources os="Windows">
+		<j2se version="1.4+"/>
+		<nativelib href="native-windows.jar"/>
+	</resources>
+	<resources os="Mac OS">
+		<j2se version="1.4+"/>
+		<nativelib href="natives-macos.jar"/>
+	</resources>
+	<application-desc main-class="com.n3wt0n.spacefight.Test" />
+</jnlp>
